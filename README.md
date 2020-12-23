@@ -6,7 +6,7 @@ nginx.orgが提供するRPMファイルに含まれる`/usr/lib/systemd/system/n
 ```
 
 # 修正方法
-このリポジトリにある`nginx.service`ファイルを`/etc/systemd/system/nginx.service`に格納し、`systemd daemon-reload`を実行します。
+このリポジトリにある`nginx.service`ファイルを`/etc/systemd/system/nginx.service`に格納し、`systemd daemon-reload`を実行します。`/usr/lib/systemd/system/nginx.service`に上書きしないよう注意してください。
 
 # 不具合について
 nginx.serviceの中を見ると、`ExecStop`がありません。これは`systemctl stop`で実行されるコマンドです。このため`KillSignal`で指定されたSIGQUITが発行されます。SIGQUITだとソケットファイルが削除されないため、次に起動したときに`Address already in use`になってしまいます。
